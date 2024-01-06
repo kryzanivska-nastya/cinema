@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset='utf-8'>
+  <title>Main</title>
+  <link rel="stylesheet" href='console-cinema.css'>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/underscore@1.13.1/underscore-umd-min.js"></script>
+
+</head>
+
+
+<script>
+
+  var today = new Date();
+
+  var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+  var datet = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
+  console.log('Time and date → ' + time + ' ' + datet)
+
+  console.log('⋆ Now we have' + ' - ' + 'Money Heist(0), Dracula(1), Rex(2), Margarit(3) →' + '                      ' + '‹Films›¸')
+  console.log('⋆ Get some specific information →' + '                                                ' + '‹Films[number of film]["name of film"].date› (for ex. .date)¸')
+  console.log('⋆ Get ticket → ' + '                                                          ' + ' ‹GetTicket(number of film,"name of film")› (for ex. Money Heist)¸')
+  console.log('⋆ Register → ‹registerUser("name", "password", "login")›¸')
+  console.log('⋆ Authorize → ‹authorize("login","password")›¸')
+  console.log('⋆ Add film (as admin) → ‹addFilm("name","2020-3-12","duration","genre","price")›¸')
+  console.log('⋆ Cash (wallet of User) → ‹watchedFilm("userUuid",idOfFilm))›¸')
+
+
+  class Film {
+    constructor(date, duration, genre, price) {
+      this.date = date
+      this.duration = duration;
+      this.genre = genre;
+      this.price = price;
+      this.seats = [0, 1, 2];
+      this.freePlaces = [0, 1, 2];
+
+    }
+  }
+
+
+  let Films = []
+  Films.push({ 'Money Heist': new Film(new Date(98, 1), 1400, 'Feel good', 100, this.seats, this.freePlaces) })
+  Films.push({ 'Dracula': new Film(new Date(2021, 3), 1800, 'Detective, Action', 10, this.seats, this.freePlaces) })
+  Films.push({ 'Rex': new Film(new Date(2013, 7), 1400, 'Thriller, Horror', 250, this.seats, this.freePlaces) })
+  Films.push({ 'Margarit': new Film(new Date(90, 2), 1500, 'Fantasy, Action', 300, this.seats, this.freePlaces) })
+
+
+  let iddd = function () {
+    Films.forEach((item, i) => {      // id
+      item.id = i + 1;
+    });
+  }();
+
+
+  let GetTicket = function (number, nameOfFilm) {
+
+    let result = Films[number][nameOfFilm].freePlaces
+    let arg = parseInt(prompt('Choose ' + result));
+    switch (arg) {
+      case 0:
+      case 1:
+      case 2:
+        if (confirm('Are you sure you want to choose this seat?')) {
+
+          var index = Films[number][nameOfFilm].freePlaces.indexOf(arg);
+          if (index > -1) {
+            Films[number][nameOfFilm].freePlaces.splice(index, 1);
+          }
+
+          console.log(arg + ' Was saved to the database.')
+          console.log(Films[number])
+
+        } else {
+
+          console.clear()
+          console.log('Thing was not saved to the database.');
+          console.log('Now we have' + ' - ' + 'Money Heist, Dracula, Rex, Margarit. ' + 'Write <Films["number of film"]>. ')
+          console.log('→ If you wanna get a seat write ‹getTicket["number of film"]["name of film]› (for ex. Money Heist)¸')
+          console.log('→ If you wanna get some specific information → ‹Films["name of film"]› (for ex. .date)¸')
+          console.log('→ If you wanna register → ‹registerUser("name", "password", "login")›¸')
+          console.log('→ If you wanna authorize → ‹authorize("login","password")›¸')
+          console.log('→ If you wanna add film (as admin) → ‹addFilm("name","2020-3-12","duration","genre","price")›¸')
+
+        }
+        break;
+      default: console.log('Sth was wrong.')
+    }
+  }
+
+  let arr = [10, -2, 7, -1, 9]
+
+
+  function bubbleSort(arr) {
+    let swapped;
+    do {
+      swapped = false;
+      for (let i = 0; i < arr.length - 1; i++) {
+        if (arr[i] > arr[i + 1]) {
+          let temp = arr[i];
+          arr[i] = arr[i + 1];
+          arr[i + 1] = temp;
+          swapped = true;
+        }
+      }
+    } while (swapped);
+
+    return arr;
+  }
+
+
+  let sortedArray = bubbleSort(arr);
+  console.log(sortedArray);
+
+
+  
+</script>
+
+</body>
+
+</html>
